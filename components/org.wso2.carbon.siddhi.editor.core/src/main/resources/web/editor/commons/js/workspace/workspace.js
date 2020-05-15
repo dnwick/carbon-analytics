@@ -51,6 +51,17 @@ define(['ace/ace', 'jquery', 'lodash', 'log','dialogs','./service-client','welco
                 app.outputController.makeInactiveActivateButton();
             };
 
+            this.createNewETLFlowTab = function createNewETLFlowTab() {
+                var editorId = app.config.container;
+                var options = {};
+                $(editorId).css("display", "block");
+                //Showing menu bar
+
+                _.set(options, "view", app.utils.getGlobalConstnts().VIEW_ETL_FLOW_WIZARD);
+                app.tabController.newTab(options);
+                app.outputController.makeInactiveActivateButton();
+            };
+
             this.saveFileBrowserBased = function saveFile() {
                 var editor = ace.edit('siddhi-editor');
                 var code = editor.getValue();
@@ -730,6 +741,8 @@ define(['ace/ace', 'jquery', 'lodash', 'log','dialogs','./service-client','welco
             };
 
             app.commandManager.registerHandler('create-new-tab', this.createNewTab);
+
+            app.commandManager.registerHandler('create-new-etl-flow', this.createNewETLFlowTab);
 
             app.commandManager.registerHandler('save', this.handleSave, this);
 
